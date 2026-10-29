@@ -1,18 +1,35 @@
-namespace LibraryApp
+namespace LibraryApp;
+
+/// <summary>
+/// Описывает книгу библиотечного каталога.
+/// </summary>
+public sealed class Book
 {
-    public class Book
+    /// <summary>
+    /// Уникальный идентификатор книги.
+    /// </summary>
+    public required int Id { get; init; }
+
+    /// <summary>
+    /// Название книги.
+    /// </summary>
+    public required string Title { get; init; }
+
+    /// <summary>
+    /// Автор книги.
+    /// </summary>
+    public required string Author { get; init; }
+
+    /// <summary>
+    /// Признак того, что книга доступна для выдачи.
+    /// Изменять состояние может только класс <see cref="Library"/>.
+    /// </summary>
+    public bool IsAvailable { get; internal set; } = true;
+
+    /// <inheritdoc />
+    public override string ToString()
     {
-        public int Id { get; set; }
-
-        public string Title { get; set; }
-
-        public string Author { get; set; }
-
-        public bool IsAvailable { get; set; } = true;
-
-        public override string ToString()
-        {
-            return $"Id: {Id}, \"{Title}\", {Author}, {(IsAvailable ? "доступна" : "выдана")}";
-        }
+        string state = IsAvailable ? "доступна" : "выдана";
+        return $"Id: {Id}, \"{Title}\", {Author}, {state}";
     }
 }
